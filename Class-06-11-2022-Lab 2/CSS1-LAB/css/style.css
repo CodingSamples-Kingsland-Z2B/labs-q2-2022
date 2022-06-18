@@ -1,0 +1,75 @@
+img {
+	width: 275px;
+}
+
+hr {
+	border-color: whitesmoke;
+	background-color: whitesmoke;
+}
+
+footer {
+	height: 30px;
+	width: 100%;
+	margin: 0;
+	background-color: lightblue;
+	position: fixed;
+	bottom: 0;
+	font-size: 28px;
+	padding: 10px;
+}
+
+.main-title {
+	text-transform: uppercase;
+}
+
+.town {
+	text-transform: capitalize;
+	letter-spacing: 1px;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.actual {
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 5px;
+	margin-top: 91px;
+}
+.feels-like {
+	margin-top: 5px;
+	font-size: 24px;
+}
+
+.left-panel {
+	margin: 5px;
+	width: 50%;
+}
+.right-panel {
+	width: 40%;
+	margin: 5px;
+	font-size: 22px;
+	padding-left: 10px;
+}
+.green {
+	color: green;
+}
+
+.town-wrapper {
+	border: green 1px solid;
+	border-radius: 10px;
+	padding: 10px;
+    margin: 10px 5px 10px 5px;
+}
+
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}

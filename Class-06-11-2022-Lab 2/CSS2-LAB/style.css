@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+body {
+    background-color: rgb(252, 239, 185);
+
+}
+h1 {
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 2px 2px #ff0000;
+}
+
+h2 {
+    font-style: italic;
+}
+
+div.menu {
+    font-family: "Parisienne", cursive;
+    margin:10px;
+    border: 5px solid black;
+    border-radius: 0.5em;
+    padding: 15px;
+    background-color: rgba(255, 127, 80,0.5);
+    position: fixed;
+    font-weight: bold;
+   
+}
+
+table.calories {
+    border: rgb(245, 174, 20) 1px solid;
+}
+table.calories td, table.calories th {
+    border: rgb(245, 174, 20) 1px solid;
+}
+
+table.calories tr:nth-child(odd) {
+ background-color: rgb(245, 174, 20);
+}
+
+tr:hover {
+    background-color: black;
+    color: white;
+}
+
+a {
+    position: fixed;
+    bottom: 0;
+    background-color: lawngreen;
+    color: darkgreen;
+    border: solid limegreen 1px;
+    border-radius: 5px;
+    text-shadow: 0 1px white;
+    padding: 10px;
+    box-shadow: 0 1px 1px lightgreen,inset 0 1px 0 honeydew;
+}
+/* a:hover{
+    filter: invert(100%);
+} */
+a.chart {
+    width: 100px;
+}
+
+a.home {
+    width:42px
+}
