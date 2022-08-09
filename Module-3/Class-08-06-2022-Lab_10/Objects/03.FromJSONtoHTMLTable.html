@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>FromJSONToHTMLTable</title>
+		<style>
+			table,th{
+			border: groove;
+			border-collapse: collapse;
+
+			© Kingsland – https://kingslanduniversity.com. Unauthorized copy, reproduction or use is not permitted.
+			Follow us: Page 3 of 8
+
+			}
+			td{
+			border: 1px solid black;
+			}
+			td,th{
+			padding: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper"></div>
+		<script>
+			window.onload = function () {
+				let container = document.getElementById("wrapper");
+				container.innerHTML = main([
+					'[{"Name":"Tomatoes & Chips","Price":2.35},{"Name":"J&B Chocolate","Price":0.96}]',
+				]);
+			};
+
+			function main(jsonArray) {
+				var rules = [
+					{ expression: /&/g, replacement: "&amp;" },
+					{ expression: /</g, replacement: "&lt;" },
+					{ expression: />/g, replacement: "&gt;" },
+					{ expression: /"/g, replacement: "&quot;" },
+					{ expression: /'/g, replacement: "&#039;" }, // or  &#39;  or  &#0039;
+					// &apos;  is not supported by IE8
+					// &apos;  is not defined in HTML 4
+				];
+				//decode the json form the array holding the json
+				let listOfScoreObjects = JSON.parse(jsonArray[0]);
+				//get the keys out for the table header
+				let keys = Object.keys(listOfScoreObjects[0]);
+				// start the output table
+				let table = "<table>\n";
+				//make header
+				let row = "  <tr>";
+				for (let key of keys) {
+					let th = "<th>";
+					th += key;
+					th += "</th>";
+					row += th;
+				}
+				row += "</tr>";
+				table += row + "\n";
+				//loop through array of objects to fill table
+				for (let obj of listOfScoreObjects) {
+					//create row
+					let row = "  <tr>";
+					for (let key in obj) {
+						//create table data
+						let td = "<td>";
+						//take text out of object
+						let text = String(obj[key]);
+						//console.log(text);
+						//escape text
+						for (let rule of rules) {
+							text = text.replace(
+								rule.expression,
+								rule.replacement
+							);
+						}
+						//add escaped text to table data
+						td += text;
+						td += "</td>";
+						//add data to row
+						row += td;
+					}
+					row += "</tr>";
+					//add row to table
+					table += row + "\n";
+				}
+				//finish table
+				table += "</table>";
+				//send out table
+				console.log(table);
+				return table;
+			}
+		</script>
+	</body>
+</html>

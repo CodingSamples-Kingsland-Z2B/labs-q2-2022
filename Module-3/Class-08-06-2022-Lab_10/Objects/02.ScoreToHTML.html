@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Score to HTML</title>
+	</head>
+	<body>
+		<script>
+			let jsonInput = ['[{"name":"Peter & Kiro","score":479},{"name":"George, Maria & Viki","score":205}]'];
+
+			main(jsonInput);
+
+			function main(jsonArray) {
+				var rules = [
+					{ expression: /&/g, replacement: "&amp;" },
+					{ expression: /</g, replacement: "&lt;" },
+					{ expression: />/g, replacement: "&gt;" },
+					{ expression: /"/g, replacement: "&quot;" },
+					{ expression: /'/g, replacement: "&#039;" }, // or  &#39;  or  &#0039;
+					// &apos;  is not supported by IE8
+					// &apos;  is not defined in HTML 4
+				];
+				//decode the json form the array holding the json
+				let listOfScoreObjects = JSON.parse(jsonArray[0]);
+				//get the keys out for the table header
+				let keys = Object.keys(listOfScoreObjects[0]);
+				//make the table
+				let table = document.createElement("table");
+				//make header
+				let row = document.createElement("tr");
+				for (let key of keys) {
+					let th = document.createElement("th");
+					th.innerText = key;
+					row.append(th);
+				}
+				table.append(row);
+				//loop through array of objects to fill table
+				for (let obj of listOfScoreObjects) {
+					//create row
+					let row = document.createElement("tr");
+					for (let key in obj) {
+						//create table data
+						let td = document.createElement("td");
+						//take text out of object
+						let text = String(obj[key])
+						console.log(text);
+						//escape text
+						for(let rule of rules){
+							text = text.replace(rule.expression,rule.replacement);
+						}
+						//add escaped text to table data
+						console.log(text);
+						td.innerHTML= text;
+						//add data to row
+						row.append(td);
+					}
+					//add row to table
+					table.append(row);
+				}
+				//append table to body
+				document.body.append(table)
+			}
+		</script>
+	</body>
+</html>
