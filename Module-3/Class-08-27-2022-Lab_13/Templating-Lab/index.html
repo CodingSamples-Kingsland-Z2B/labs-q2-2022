@@ -1,0 +1,87 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <title>Contacts</title>
+</head>
+
+<body>
+  <h1>My contacts</h1>
+  <div id="contacts">
+  
+  </div>
+  <script type="text/x-handlebars-template" id="cardTemplate">
+    {{#each contacts}}
+    <div class="contact card">
+      <div>
+        <i class="far fa-user-circle gravatar"></i>
+      </div>
+      <div class="info">
+        <h2>Name: {{name}}</h2>
+        <button class="detailsBtn">Details</button>
+        <div class="details" id="{{id}}">
+          <p>Phone number: {{phoneNumber}}</p>
+          <p>Email: {{email}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </script>
+
+  <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="./contacts.js"></script>
+
+  <script>
+    let display = document.getElementById("contacts");
+    let cardTemplate = document.getElementById("cardTemplate").innerHTML;
+    let template = Handlebars.compile(cardTemplate);
+    let context = { contacts:contacts};
+
+    display.innerHTML = template(context);
+
+    let buttons = document.getElementsByClassName("detailsBtn");
+
+    for(let i=0;i< buttons.length;i++){
+      let button = buttons[i];
+
+      button.addEventListener("click",function(event){
+        let sibling = event.target.nextElementSibling;
+        console.log(sibling);
+
+        if(sibling.style.display == "" ||sibling.style.display == "none"){
+          
+          sibling.style.display = "block";
+          console.log(sibling.style.display);
+        }else{
+          sibling.style.display = "none";
+          console.log(sibling.style.display);
+        }
+        
+
+      })
+    }
+  </script>
+  <!-- 
+
+    <div class="contact card">
+      <div>
+        <i class="far fa-user-circle gravatar"></i>
+      </div>
+      <div class="info">
+        <h2>Name: John</h2>
+        <button class="detailsBtn">Details</button>
+        <div class="details" id="1">
+          <p>Phone number: 0847759632</p>
+          <p>Email: john@john.com</p>
+        </div>
+      </div>
+    </div>
+
+
+   -->
+</body>
+
+</html>
