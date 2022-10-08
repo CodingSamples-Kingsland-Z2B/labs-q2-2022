@@ -1,0 +1,20 @@
+{
+    "name": "name",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "express-handlebars": "^6.0.6",
+        "mongoose": "^6.6.5",
+        "uniqid": "^5.0.3"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.2"
+    },
+    "scripts": {
+        "start": "nodemon index.js"
+    }
+}
