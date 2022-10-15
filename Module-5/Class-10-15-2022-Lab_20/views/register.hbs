@@ -1,0 +1,63 @@
+<main>
+	<h1>Register Form</h1>
+	<div id="notifications">
+
+	</div>
+	<div class="form">
+		<form action="" method="">
+			<label for="username">Username</label>
+			<input type="text" id="username" name="username" />
+
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" />
+
+			<label for="repeatPassword">Re-Password</label>
+			<input type="password" id="repeatPassword" name="repeatPassword" />
+			<input type="submit" id="register" value="Register" />
+		</form>
+	</div>
+</main>
+
+<script>
+	let notifications = document.getElementById("notifications");
+	notifications.style.display="none"
+	document.getElementById("register").addEventListener("click",function(e){
+		e.preventDefault(); 
+		let username = document.getElementById("username").value;
+		let password = document.getElementById("password").value;
+		let repeatPassword = document.getElementById("repeatPassword").value;
+		let data = {
+			username,
+			password,
+			repeatPassword
+		}
+		fetch("/user/register",{ 
+			method: 'POST', 
+			headers: {
+				'Content-Type': 'application/json' 
+			}, 
+			body:JSON.stringify(data)
+		}).then(response=>{
+			console.log(response);
+			if(response.redirected){
+				window.location.replace(response.url);
+			}
+			return response.json()
+		}).then(data=>{
+			let errors = data.errors;
+			console.log(errors);
+			
+			notifications.style.display = "block";
+			if(errors[0].param === "username" && errors[0].param.msg == 'Invalid value'){
+				notifications.innerText = "Please enter a valid username. Valid names are 5 character long and can only have letters and numbers"
+			} else if(errors[0].param === "username"){
+				notifications.innerText = "This username already exists, please try another"
+			} else if(errors[0].param === "password"){
+				notifications.innerText = "Please enter a valid password. A valid password has 5 character and can only have letters and numbers"
+			}else if(errors[0].param === "repeatPassword"){
+				notifications.innerText = "Please make sure that the passwords match"
+			}
+		})
+	})
+
+</script>

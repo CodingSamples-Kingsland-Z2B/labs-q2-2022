@@ -1,0 +1,40 @@
+<main>
+	<h1>Browser</h1>
+	{{!-- <form action="" method="">
+		<input
+			type="text"
+			class="search"
+			name="search"
+			placeholder="Search..."
+		/>
+		<input
+			type="number"
+			name="from"
+			class="difficulty"
+			placeholder="Difficulty from..."
+		/>
+		<span>-</span>
+		<input
+			type="number"
+			name="to"
+			class="difficulty"
+			placeholder="Difficulty to..."
+		/>
+		<input type="submit" value="search" />
+	</form> --}}
+	{{#each cubes}}
+		<div class="cube">
+			<img class="cube" src="{{imageURL}}" />
+			<p class="name">{{name}}</p>
+			<p><span>Difficulty level:</span> {{difficulty}}</p>
+			<a class="btn" href="/details/{{_id}}">Details</a>
+		</div>
+	{{else}}
+		<div class="cube">
+
+			<h2 class="name">NO CUBES WERE FOUND</h2>
+			<p>Click here to add the first Rubic's Cube!</p>
+			<a class="btn" href="/create">New Cube</a>
+		</div>
+	{{/each}}
+</main>
